@@ -19,6 +19,11 @@ class AjaxController  {
        
     }
 
+    public function searchPremios(object $usuario){
+        return $this->ajaxModel->searchPremios($usuario);
+       
+    }
+
     
 
 }

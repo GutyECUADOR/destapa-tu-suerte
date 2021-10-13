@@ -65,6 +65,29 @@ class AjaxModel extends Conexion  {
    
     }
 
+    public function searchPremios(object $usuario) {
+        $query = " 
+            SELECT * FROM usuarios WHERE dni = :dni
+        ";
+
+        try{
+            $stmt = $this->instancia->prepare($query); 
+            $stmt->bindValue(':dni', $usuario->cedula);
+
+                if($stmt->execute()){
+                    $resulset = $stmt->fetchAll( \PDO::FETCH_ASSOC );
+                    
+                }else{
+                    $resulset = false;
+                }
+            return $resulset;  
+
+        }catch(\PDOException $exception){
+            return array('status' => 'ERROR', 'message' => $exception->getMessage() );
+        }
+   
+    }
+
     
 }
 

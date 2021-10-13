@@ -42,6 +42,19 @@ $dotenv->load();
 
       break;
 
+      case 'searchPremios':
+        if (isset($_POST['usuario'])) {
+          $usuario = json_decode($_POST['usuario']);
+          $respuesta = $ajaxController->searchPremios($usuario);
+          $rawdata = array('status' => 'OK', 'message' => 'Busqueda finalizada', 'data' => $respuesta);
+        }else{
+          http_response_code(400);
+          $rawdata = array('status' => 'error', 'message' => 'No se ha indicado parámetros.');
+        }
+        echo json_encode($rawdata);
+
+      break;
+
       default:
           $rawdata = array('status' => 'error', 'message' =>'El API no ha podido responder la solicitud, revise el tipo de action');
           echo json_encode($rawdata);
