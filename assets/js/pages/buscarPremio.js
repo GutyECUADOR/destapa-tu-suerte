@@ -1,6 +1,7 @@
 class Usuario {
     constructor() {
       this.cedula = '';
+      this.telefono = '';
       this.terminos = false
     }
 

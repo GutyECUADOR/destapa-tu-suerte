@@ -32,6 +32,11 @@ if (isset($_SESSION["usuario_cedula".APP_UNIQUE_KEY])){
                         <label for="cedula">Documento de Identidad</label>
                         <input type="text" v-model="usuario.cedula" class="form-control form-control-sm" id="cedula" placeholder="Ingrese su numero de documento" pattern="[0-9]+" maxlength="13" required>
                       </div>
+
+                      <div class="form-group">
+                        <label for="telefono">Teléfono celular</label>
+                        <input type="text" v-model="usuario.telefono" class="form-control form-control-sm" id="telefono" placeholder="Ingrese su numero de Teléfono" pattern="[0-9]+" maxlength="10" required>
+                      </div>
                     
                       <div class="">
                         <div class="custom-control custom-checkbox primary-color">
@@ -46,6 +51,10 @@ if (isset($_SESSION["usuario_cedula".APP_UNIQUE_KEY])){
                       </button>
                     </div>
                   </form>
+
+                  <div class="col-12 justify-content-center text-center">
+                    <h5 class="tertiary-color mt-2 pb-2">Se encontraron {{ search_user.premios.length }} premios.</h5>
+                  </div>
 
                   <table class="table"> 
                       <thead>

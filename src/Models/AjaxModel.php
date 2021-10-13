@@ -67,12 +67,13 @@ class AjaxModel extends Conexion  {
 
     public function searchPremios(object $usuario) {
         $query = " 
-            SELECT * FROM usuarios WHERE dni = :dni
+            SELECT * FROM usuarios WHERE dni = :dni AND telefono = :telefono
         ";
 
         try{
             $stmt = $this->instancia->prepare($query); 
             $stmt->bindValue(':dni', $usuario->cedula);
+            $stmt->bindValue(':telefono', $usuario->telefono);
 
                 if($stmt->execute()){
                     $resulset = $stmt->fetchAll( \PDO::FETCH_ASSOC );
