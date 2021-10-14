@@ -11,6 +11,7 @@ if (isset($_SESSION["usuario_cedula".APP_UNIQUE_KEY])){
 
     <div class="main-container main-background" id="app" >
       <section style="padding-top: 1.5rem;">
+        <h2 class="text-center text-white mb-3" style="color: #ffeb00 !important; font-weight: bold; font-size: 2.5rem;">¡ BIENVENIDOS !</h2>
         <div class="container">
           <div class="row flex-md-row card card-lg border-0">
             <div class="col-12 col-md-6 card-body">
@@ -58,18 +59,19 @@ if (isset($_SESSION["usuario_cedula".APP_UNIQUE_KEY])){
                         <label for="email">Correo Electrónico</label>
                         <input type="email" v-model="usuario.correo" class="form-control form-control-sm" id="email" placeholder="Indique su email" maxlength="50" required>
                       </div>
-                      <div class="form-group">
-                        <label for="codigoPremio" style="text-align: center;color: #002693 !important; font-weight: bold;">INGRESA EL CÓDIGO GANADOR QUE ENCONTRASTE BAJO LA TAPA</label>
-                        <input type="text" v-model="usuario.codigo" class="form-control form-control-sm" id="codigoPremio" placeholder="Ingresa tu codigo del premio" required>
-                      </div>
-                      <div class="">
-                        <div class="custom-control custom-checkbox primary-color">
-                          <input type="checkbox" v-model="usuario.terminos" class="custom-control-input" value="agree" name="agree-terms" id="check-agree">
-                          <label class="custom-control-label text-justify small tertiary-color font-weight-bold" for="check-agree">He leído y aceptado los Términos y condiciones, y autorizo el tratamiento de mis datos personales para participar en la Actividad promocional.</label>
-                          </label>
-                        </div>
+
+                      <div class="custom-control custom-checkbox primary-color">
+                        <input type="checkbox" v-model="usuario.terminos" class="custom-control-input" value="agree" name="agree-terms" id="check-agree">
+                        <label class="custom-control-label text-justify small tertiary-color font-weight-bold" for="check-agree">
+                        Certifico que soy mayor de edad, he leído y aceptado los Términos y condiciones, y autorizo el tratamiento de mis datos personales para participar en la Actividad promocional.
+                        </label>
                       </div>
 
+                      <div class="form-group">
+                        <label for="codigoPremio" style="text-align: center;color: #002693 !important; font-weight: bold;">INGRESA EL CÓDIGO GANADOR QUE ENCONTRASTE BAJO LA TAPA</label>
+                        <input type="text" v-model="usuario.codigo" class="form-control form-control-sm" id="codigoPremio" placeholder="Ingresa tu codigo del premio" :disabled="!usuario.terminos" required>
+                      </div>
+                      
                       <button type="submit" class="btn btn-primary btn-block tertiary-color-background" :disabled="search_user.isloading"  >
                           <i class="fa" :class="[{'fa-spin fa-refresh': search_user.isloading}, {  'fa-trophy' : !search_user.isloading  }]" ></i> Canjear Premio
                       </button>
@@ -89,7 +91,7 @@ if (isset($_SESSION["usuario_cedula".APP_UNIQUE_KEY])){
                   
                 </div>
                
-                <div class="card card-sm shadow text-justify border-0" style="height: 50%;">
+                <div class="card card-sm shadow text-justify border-0" style="height: 40%;">
                   <div class="card-body terms-box text-white" style="color: white;background: #0054ac;">
                     <h3 class="text-center">MEGA PROMOCIÓN DESTAPA TU SUERTE</h3>
                     
@@ -503,7 +505,8 @@ if (isset($_SESSION["usuario_cedula".APP_UNIQUE_KEY])){
                   
                 </div>
 
-                <div class="embed-responsive embed-responsive-16by9 mb-3" style="border-width: 4px; margin-top:5%; border-radius: 5px;">
+                <h4 class="text-center text-white mb-3">MIRA ESTE VIDEO PARA MAYOR INFORMACION DE NUESTRA PROMO</h4>
+                <div class="embed-responsive embed-responsive-16by9 mb-3" style="border-width: 4px; border-radius: 5px;">
                   <iframe class="embed-responsive-item" style="border: 6px solid #CCCCCC" src="https://youtube.com/embed/ywlWBlNTmi?autoplay=1&amp;controls=1&amp;mute=0"></iframe>
                 </div>
                

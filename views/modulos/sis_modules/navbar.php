@@ -28,10 +28,13 @@
                         <a href="?action=mecanica" class="nav-link  <?php echo getActive('mecanica');?>">Cómo participar</a>
                     </li>
                     <li class="nav-item">
-                        <a href="?action=buscarPremio" class="nav-link  <?php echo getActive('buscarPremio');?>">Busca tus premios</a>
+                        <a href="?action=buscarPremio" class="nav-link  <?php echo getActive('buscarPremio');?>">Tu perfil</a>
                     </li>
                     <li class="nav-item">
-                        <a href="?action=informacion" class="nav-link  <?php echo getActive('informacion');?>">Información</a>
+                        <a href="?action=productos" class="nav-link  <?php echo getActive('productos');?>">Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="?action=informacion" class="nav-link  <?php echo getActive('informacion');?>">Premios</a>
                     </li>
                     <li class="nav-item">
                         <a href="#" data-toggle="modal" data-target="#terminosModal" class="nav-link">Términos & Condiciones</a>

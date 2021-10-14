@@ -11,9 +11,9 @@ if (isset($_SESSION["usuario_cedula".APP_UNIQUE_KEY])){
 
     <div class="main-container main-background" id="app" >
       <section style="padding-top: 1.5rem;">
-        <div class="container" style="width: 800px;">
-          <div class="row justify-content-center card card-lg border-0">
-            <div class="col-12 card-body p-0 pt-3">
+        <div class="container">
+          <div class="row flex-md-row card card-lg border-0">
+            <div class="col-12 col-md-12 card-body">
               <div class="row">
                 <div class="col-12 justify-content-center text-center">
                   <h5 class="tertiary-color pb-2">Busca aqui tus premios canjeados</h5>
@@ -56,7 +56,7 @@ if (isset($_SESSION["usuario_cedula".APP_UNIQUE_KEY])){
                     <h5 class="tertiary-color mt-2 pb-2">Se encontraron {{ search_user.premios.length }} premios.</h5>
                   </div>
 
-                  <table class="table"> 
+                  <table class="table table-responsive"> 
                       <thead>
                           <tr> 
                               <th class="custom-table-head">Premio</th>
@@ -69,7 +69,10 @@ if (isset($_SESSION["usuario_cedula".APP_UNIQUE_KEY])){
                           <tr v-for="premio in search_user.premios">
                               <td>{{premio.premio}}</td>
                               <td>{{premio.fecha}}</td>
-                              <td>{{premio.instrucciones}}</td>
+                              <td>
+                                {{premio.instrucciones}}
+                                <a :href="premio.url_link" target="_blank">Clic Aqui </a> 
+                              </td>
                           </tr>
                       </tbody>
                   </table>
