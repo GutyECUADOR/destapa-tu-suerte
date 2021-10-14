@@ -34,7 +34,7 @@
                         <a href="?action=productos" class="nav-link  <?php echo getActive('productos');?>">Productos</a>
                     </li>
                     <li class="nav-item">
-                        <a href="?action=informacion" class="nav-link  <?php echo getActive('informacion');?>">Premios</a>
+                        <a href="?action=premios" class="nav-link  <?php echo getActive('premios');?>">Premios</a>
                     </li>
                     <li class="nav-item">
                         <a href="#" data-toggle="modal" data-target="#terminosModal" class="nav-link">Términos & Condiciones</a>

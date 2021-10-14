@@ -8,7 +8,7 @@ TODO:
 */
 
 (function( $ ) {
-    var MAX_ROCKETS = 3,
+    var MAX_ROCKETS = 20,
         MAX_PARTICLES = 200;
 
     var FUNCTIONS = {
