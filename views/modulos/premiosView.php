@@ -7,79 +7,75 @@
                 <div class="container">
                     
                     <div class="row justify-content-center mb-4">
-                        <div class="col-12 col-md-10 col-lg-8 text-center">
-                            <img src="assets/img/logo.png" alt="Promo" class="img-responsive w-50 zoom mb-1" style="border-radius:10px">
+                        <div class="col-12 col-md-6 col-lg-6 text-center">
+                            <img src="assets/img/1moto.png" alt="Promo" style="max-height: 200px;" >
+                            <h2 class="text-center text-white mb-3" style="color: #fff !important; font-weight: bold; font-size: 1.5rem;">10 motos AKT Ref. NKD 125 cc</h2>
+          
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-6 text-center">
+                            <img src="assets/img/2tv.png" alt="premios"  style="max-height: 200px;">
+                            <h2 class="text-center text-white mb-3" style="color: #fff !important; font-weight: bold; font-size: 1.5rem;">50 televisores Challenger de 42”</h2>
+          
                         </div>
                     </div>
 
-                    <div class="row justify-content-center">
-                        <div class="col-12 col-md-10 col-lg-6 text-center">
-                            <img src="assets/img/BOTELLAS_Mesa de trabajo 1.png" alt="premios" class="img-responsive w-75 zoom">
+                    <div class="row justify-content-center mb-4">
+                        <div class="col-12 col-md-6 col-lg-6 text-center">
+                            <img src="assets/img/3celular.png" alt="Promo" style="max-height: 200px;" >
+                            <h2 class="text-center text-white mb-3" style="color: #fff !important; font-weight: bold; font-size: 1.5rem;">
+                                100 teléfonos Celulares Inteligente Xiaomi Poco M3 125 GB
+                            </h2>
+          
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-6 text-center">
+                            <img src="assets/img/4bicicleta.png" alt="premios" style="max-height: 200px;">
+                            <h2 class="text-center text-white mb-3" style="color: #fff !important; font-weight: bold; font-size: 1.5rem;">
+                                100 bicicletas todo terreno 18 velocidades
+                            </h2>
+          
                         </div>
                     </div>
 
-                    <div class="row justify-content-center">
-                        <div class="col-12 text-center">
-                            <img src="assets/img/TEXTO 2_Mesa de trabajo 1.png" alt="premios" class="img-responsive w-75 zoom">
+                    <div class="row justify-content-center mb-4">
+                        <div class="col-12 col-md-6 col-lg-6 text-center">
+                            <img src="assets/img/5sured.png" alt="Promo" style="max-height: 100px;" >
+                            <h2 class="text-center text-white mb-3" style="color: #fff !important; font-weight: bold; font-size: 1.5rem;">
+                                500 Bonos o giros SURED en dinero por cien mil pesos cada uno (100.000 COP). 
+                            </h2>
+          
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-6 text-center">
+                            <img src="assets/img/6amazon.png" alt="premios" style="max-height: 100px;">
+                            <h2 class="text-center text-white mb-3" style="color: #fff !important; font-weight: bold; font-size: 1.5rem;">
+                                1.500 cuentas Amazon Prime (por 1 mes)
+                            </h2>
+          
                         </div>
                     </div>
 
-                    <div class="row justify-content-center">
-                        <div class="col-12 text-center">
-                            <img src="assets/img/TEXTO 3_Mesa de trabajo 1.png" alt="premios" class="img-responsive w-50 zoom">
+                    <div class="row justify-content-center mb-4">
+                        <div class="col-12 col-md-6 col-lg-6 text-center">
+                            <img src="assets/img/7recargarcelular.png" alt="Promo" style="max-height: 100px;" >
+                            <h2 class="text-center text-white mb-3" style="color: #fff !important; font-weight: bold; font-size: 1.5rem;">
+                            156.671 recargas a celular (Minutos y Plan de datos) por valor de Cinco mil pesos ($5.000) cada una a cualquier operador.
+
+                            </h2>
+          
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-6 text-center">
+                            <img src="assets/img/8betplay.png" alt="premios" style="max-height: 100px;">
+                            <h2 class="text-center text-white mb-3" style="color: #fff !important; font-weight: bold; font-size: 1.5rem;">
+                            298.500   recargas para apuestas BETPLAY por valor de Cinco mil pesos ($5.000) cada una 
+
+                            </h2>
+          
                         </div>
                     </div>
-
-                    <div class="row justify-content-center">
-                        <div class="col-12 col-md-10 col-lg-6 text-center">
-                            <img src="assets/img/ICONOS_Mesa de trabajo 1.png" alt="premios" class="img-responsive w-75 zoom">
-                        </div>
-                    </div>
-
-                    <div class="row justify-content-center">
-                        <div class="col-12 text-center">
-                            <img src="assets/img/TEXTO 4_Mesa de trabajo 1.png" alt="premios" class="img-responsive w-50 zoom">
-                        </div>
-                    </div>
-
-                    <div class="row justify-content-center">
-                        <div class="col-12 text-center">
-                            <img src="assets/img/TEXTO 5.png" alt="premios" class="img-responsive w-50 zoom">
-                        </div>
-                    </div>
-
-                    <div class="row justify-content-center">
-                        <div class="col-12 text-center">
-                            <img src="assets/img/TEXTO 6_Mesa de trabajo 1.png" alt="premios" class="img-responsive w-50 zoom">
-                        </div>
-                    </div>
-
-                    <div class="row justify-content-center">
-                        <div class="col-12 col-md-10 col-lg-6 text-center">
-                            <img src="assets/img/LOGOS_Mesa de trabajo 1.png" alt="premios" class="img-responsive w-100 zoom">
-                        </div>
-                    </div>
-
-
                     
-                    <!-- <div class="row justify-content-center">
-                        <div class="col-12 col-md-10 col-lg-6 text-center">
-                            <img src="assets/img/MECANICA-1.png" alt="premios" class="img-responsive w-100 zoom">
-                        </div>
-                        <div class="col-12 col-md-10 col-lg-6 text-center">
-                            <img src="assets/img/MECANICA-2.png" alt="premios" class="img-responsive w-100 zoom">
-                        </div>
-                    </div>
-                
-                    <div class="row justify-content-center">
-                        <div class="col-12 col-md-10 col-lg-6 text-center">
-                            <img src="assets/img/MECANICA-3.png" alt="premios" class="img-responsive w-100 zoom">
-                        </div>
-                    </div> -->
-
-                
-
-                
                 
                     <!--end of row-->
                 </div>
