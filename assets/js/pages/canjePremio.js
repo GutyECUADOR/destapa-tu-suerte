@@ -50,8 +50,8 @@ const app = new Vue({
                
                 if (response.status == 'success') {
                     this.usuario = new Usuario();
-                    this.instruccionesCanje = response.usuario.instrucciones;
-                    this.url_link = response.usuario.url_link;
+                    this.instruccionesCanje = response.premio.instrucciones;
+                    this.url_link = response.premio.url_link;
                     
                     if (this.url_link) {
                         this.link = '<br><a href="'+ this.url_link +'" target="_blank">Clic Aqui </a> '
@@ -64,7 +64,7 @@ const app = new Vue({
                         title: response.message,
                         confirmButtonText: "Aceptar",
                         html:
-                            '<b>' + response.usuario.premio + '</b>.' +
+                            '<b>' + response.premio.premio + '</b>.' +
                             '<br>' +  this.instruccionesCanje +
                             this.link
                       })
