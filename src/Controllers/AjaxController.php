@@ -15,11 +15,8 @@ class AjaxController  {
     }
 
     public function verify_code(object $usuario){
-        $dias = array('domingo','lunes', 'martes', 'miercoles', 'jueves','viernes','sabado');
-        $diaActual = $dias[date("w")];
-        $aleatorio = rand(0, 100);
-
-        return  $this->ajaxModel->verify_code($usuario, $diaActual, $aleatorio);
+        
+        return  $this->ajaxModel->verify_code($usuario);
     
     }
 

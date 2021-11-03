@@ -1,7 +1,7 @@
 <?php
 
     function getActive($action){
-       if (isset($_GET['action']) == $action){
+       if (isset($_GET['action']) && $_GET['action'] == $action){
         return "active";
         }
         

@@ -6,32 +6,32 @@ class AjaxModel extends Conexion  {
         parent::__construct();
     }
 
-    public function verify_code(object $usuario, string $diaActual, int $aleatorio) {
+    public function verify_code(object $usuario) {
         $nombreUpper = strtoupper($usuario->nombre);
         $fechaActual = date('Y-m-d H:i:s');
+        $dias = array('domingo','lunes', 'martes', 'miercoles', 'jueves','viernes','sabado');
+        $diaActual = $dias[date("w")];
+        $aleatorio = rand(1, 100);
 
         try{
             $this->instancia->beginTransaction();  
 
             // Obteniendo el premio aleatorio
-            $query = "SELECT id, premio, :diaActual FROM aleatorio WHERE :diaActual_1 >= :aleatorio LIMIT 1";  
+            $query = "SELECT id, premio, $diaActual FROM aleatorio WHERE $diaActual >= :aleatorio AND $diaActual !=0 LIMIT 1;";  
 
             $stmt = $this->instancia->prepare($query); 
-            $stmt->bindParam(':diaActual', $diaActual); 
-            $stmt->bindParam(':diaActual_1', $diaActual);
-            $stmt->bindParam(':aleatorio', $aleatorio); 
+            $stmt->bindValue(':aleatorio', $aleatorio); 
             $stmt->execute();
             $resulset_premio = $stmt->fetch( \PDO::FETCH_ASSOC );
 
             // Consultar si codigo esta disponible
             $query = "SELECT nombre, codigo, dni FROM ganadores WHERE codigo = :codigo_select AND dni = '' AND nombre = ''";  
-
             $stmt = $this->instancia->prepare($query); 
             $stmt->bindParam(':codigo_select', $usuario->codigo); 
             $stmt->execute();
-            $resulset = $stmt->fetch( \PDO::FETCH_ASSOC );
+            $resulset_codigo = $stmt->fetch( \PDO::FETCH_ASSOC );
 
-            if ($resulset) {
+            if ($resulset_codigo) {
                 // Actualizar tabla de ganadores con codigo canjeado
                 $query = " 
                     UPDATE ganadores 
@@ -77,7 +77,14 @@ class AjaxModel extends Conexion  {
            
 
             $commit = $this->instancia->commit();
-            return array('status' => 'success', 'message' => $message, 'commit'=>$commit ,'consulta_codigo'=> $resulset, 'premio' => $resulset_premio_asignado);
+            return array('status' => 'success', 
+                        'message' => $message, 
+                        'commit'=>$commit,
+                        'aleatorio' => $aleatorio, 
+                        'resulset_premio' => $resulset_premio, 
+                        'resulset_codigo'=> $resulset_codigo, 
+                        'resulset_premio_asignado' => $resulset_premio_asignado  
+                    );
             
         }catch(\PDOException $exception){
             $this->instancia->rollBack();
