@@ -71,7 +71,7 @@ class AjaxModel extends Conexion  {
 
             }else{
                 $resulset_premio_asignado = false;
-                $message ="El código ingresado no es válido o ya fue utilizado.";
+                $message ="EN EL MOMENTO DE REGISTRAR TU CODIGO GANADOR ASEGURATE DE HACERLO DE FORMA CORRECTA TENIENDO EN CUENTA LOS CEROS LAS LETRAS O LAS LETRAS I Y L.";
             }
 
            

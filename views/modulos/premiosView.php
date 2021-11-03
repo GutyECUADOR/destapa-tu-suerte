@@ -122,9 +122,41 @@ $conteo_betplay = $premios[7]['cant_premios_entregados'];
             </section>
         </div>
 
+            <footer class="bg-gray text-light footer-long">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 col-md-3 text-center">
+                            <img alt="Logo" src="<?php echo LOGO_NAME?>" class="mb-4" style="width:100px"/>
+                            
+                        </div>
+                        <div class="col-12 col-lg-6 text-center pt-4">
+                            <h6>
+                                CANTIDAD LIMITADA DE PREMIOS COMO SE ESPECIFICA ANTERIORMENTE
+                                PROMOCION VALIDA HASTA AGOTAR EXISTENCIAS
+                                REDIME TU PREMIO ENTRE 15 DE NOVIEMBRE DEL 2021 Y EL DEL 15 DE MARZO DEL 2023
+                                (TIENES UN AÑO PARA REDIMIR TU PREMIO POSTERIOR A LA PROMOCION)
+                            </h6>
+                        </div>
+                    
+
+                    
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <p class="text-muted">
+                                &copy; Derechos Reservados <?php echo date('Y');?> 
+                            </p>
+                        </div>
+                    </div>
+                    <!--end of row-->
+                </div>
+            </footer>
+
             <?php require_once 'modals/terminosModal.php' ?>
-            <?php require_once 'sis_modules/footer.php' ?>
             <?php require_once 'modals/whatsapp.php'?>
+
+            
     </div>
 
 
