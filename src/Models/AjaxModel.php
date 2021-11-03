@@ -67,7 +67,7 @@ class AjaxModel extends Conexion  {
 
     public function searchPremios(object $usuario) {
         $query = " 
-            SELECT * FROM usuarios WHERE dni = :dni AND telefono = :telefono
+            SELECT * FROM usuarios WHERE dni = :dni AND telefono = :telefono ORDER BY fecha ASC
         ";
 
         try{

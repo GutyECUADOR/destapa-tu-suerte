@@ -2,7 +2,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-3 text-center">
-                    <img alt="Logo" src="<?php echo LOGO_NAME?>" class="mb-4" style="width:240px"/>
+                    <img alt="Logo" src="<?php echo LOGO_NAME?>" class="mb-4" style="width:100px"/>
                     
                 </div>
                 <div class="col-12 col-lg-6 text-center pt-4">

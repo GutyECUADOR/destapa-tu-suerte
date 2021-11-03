@@ -1,7 +1,7 @@
 <?php
 
     function getActive($action){
-       if ($_GET['action'] == $action){
+       if (isset($_GET['action']) == $action){
         return "active";
         }
         
@@ -31,7 +31,7 @@
                         <a href="?action=buscarPremio" class="nav-link  <?php echo getActive('buscarPremio');?>">Tu perfil</a>
                     </li>
                     <li class="nav-item">
-                        <a href="?action=productos" class="nav-link  <?php echo getActive('productos');?>">Productos</a>
+                        <a href="?action=productos" class="nav-link  <?php echo getActive('productos');?>">Productos Participantes</a>
                     </li>
                     <li class="nav-item">
                         <a href="?action=premios" class="nav-link  <?php echo getActive('premios');?>">Premios</a>
