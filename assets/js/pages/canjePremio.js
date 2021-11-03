@@ -45,13 +45,13 @@ const app = new Vue({
                 }); 
 
                 console.log(response);
-            if (response.premio) {
+            if (response.resulset_premio_asignado) {
                 this.search_user.isAutenticated = true;
                
                 if (response.status == 'success') {
                     this.usuario = new Usuario();
-                    this.instruccionesCanje = response.premio.instrucciones;
-                    this.url_link = response.premio.url_link;
+                    this.instruccionesCanje = response.resulset_premio_asignado.instrucciones;
+                    this.url_link = response.resulset_premio_asignado.url_link;
                     
                     if (this.url_link) {
                         this.link = '<br><a href="'+ this.url_link +'" target="_blank">Clic Aqui </a> '
@@ -64,7 +64,8 @@ const app = new Vue({
                         title: response.message,
                         confirmButtonText: "Aceptar",
                         html:
-                            '<b>' + response.premio.nombre_premio + '</b>.' +
+                            '<b> <img src="https://placeholder.pics/svg/400x250" alt="premio"></b>' +
+                            '<b>' + response.resulset_premio_asignado.nombre_premio + '</b>' +
                             '<br>' +  this.instruccionesCanje +
                             this.link
                       })
