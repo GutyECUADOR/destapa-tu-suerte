@@ -64,9 +64,9 @@ const app = new Vue({
                         title: response.message,
                         confirmButtonText: "Aceptar",
                         html:
-                            '<b> <img src="https://placeholder.pics/svg/400x250" alt="premio"></b>' +
+                            '<b> <img src="'+ response.resulset_premio_asignado.url_imagen +'" alt="premio" style="width: 400px;height: 250px;"></b>' +
                             '<b>' + response.resulset_premio_asignado.nombre_premio + '</b>' +
-                            '<br>' +  this.instruccionesCanje +
+                            '<br><div style="font-size:14px">' +  this.instruccionesCanje + '</div>' +
                             this.link
                       })
 

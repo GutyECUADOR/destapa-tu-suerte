@@ -102,9 +102,45 @@ class AjaxModel extends Conexion  {
    
     }
 
+
+    public function getConteoPremiosEntregados() {
+        $query = " 
+        SELECT 
+            premios.id,
+            premios.nombre_premio,
+            COUNT(premio_id) as cant_premios_entregados
+        FROM ganadores
+        RIGHT JOIN premios ON premios.id = ganadores.premio_id
+        GROUP BY 
+            premios.id,
+            premios.nombre_premio,
+            premio_id
+        ORDER BY 
+            premios.id
+        ";
+
+        try{
+            $stmt = $this->instancia->prepare($query); 
+                if($stmt->execute()){
+                    $resulset = $stmt->fetchAll( \PDO::FETCH_ASSOC );
+                    
+                }else{
+                    $resulset = false;
+                }
+            return $resulset;  
+
+        }catch(\PDOException $exception){
+            return array('status' => 'ERROR', 'message' => $exception->getMessage() );
+        }
+   
+    }
+
+
     public function searchPremios(object $usuario) {
         $query = " 
-            SELECT * FROM usuarios WHERE dni = :dni AND telefono = :telefono ORDER BY fecha ASC
+            SELECT * FROM ganadores
+            INNER JOIN premios ON ganadores.premio_id = premios.id
+            WHERE dni = :dni AND telefono = :telefono ORDER BY fecha ASC
         ";
 
         try{

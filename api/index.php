@@ -55,6 +55,13 @@ $dotenv->load();
 
       break;
 
+      case 'getConteoPremiosEntregados':
+          $respuesta = $ajaxController->getConteoPremiosEntregados();
+          $rawdata = array('status' => 'OK', 'message' => 'Busqueda finalizada', 'premios' => $respuesta);
+          echo json_encode($rawdata);
+
+      break;
+
       default:
           $rawdata = array('status' => 'error', 'message' =>'El API no ha podido responder la solicitud, revise el tipo de action');
           echo json_encode($rawdata);

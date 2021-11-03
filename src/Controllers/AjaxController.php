@@ -15,14 +15,16 @@ class AjaxController  {
     }
 
     public function verify_code(object $usuario){
-        
         return  $this->ajaxModel->verify_code($usuario);
     
     }
 
     public function searchPremios(object $usuario){
         return $this->ajaxModel->searchPremios($usuario);
-       
+    }
+
+    public function getConteoPremiosEntregados(){
+        return $this->ajaxModel->getConteoPremiosEntregados();
     }
 
     

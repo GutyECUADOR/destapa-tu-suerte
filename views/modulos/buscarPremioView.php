@@ -62,11 +62,12 @@
                           
                           <tbody>
                               <tr v-for="premio in search_user.premios">
-                                  <td>{{premio.premio}}</td>
+                                  <td>{{premio.nombre_premio}}</td>
                                   <td>{{premio.fecha}}</td>
                                   <td>
-                                    {{premio.instrucciones}}
-                                    <a :href="premio.url_link" target="_blank">Clic Aqui </a> 
+                                    <div v-html="premio.instrucciones">
+                                    </div>
+                                    <a :href="premio.url_link" target="_blank" class="btn btn-primary btn-block">Clic Aqui </a> 
                                   </td>
                               </tr>
                           </tbody>
