@@ -45,7 +45,7 @@ const app = new Vue({
                 }); 
 
                 console.log(response);
-            if (response.usuario) {
+            if (response.premio) {
                 this.search_user.isAutenticated = true;
                
                 if (response.status == 'success') {
@@ -64,7 +64,7 @@ const app = new Vue({
                         title: response.message,
                         confirmButtonText: "Aceptar",
                         html:
-                            '<b>' + response.premio.premio + '</b>.' +
+                            '<b>' + response.premio.nombre_premio + '</b>.' +
                             '<br>' +  this.instruccionesCanje +
                             this.link
                       })
@@ -76,7 +76,12 @@ const app = new Vue({
                 }
             }else{
                 this.search_user.isAutenticated = false;
-                alert(response.message);
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Código no válido',
+                    confirmButtonText: "Aceptar",
+                    text: response.message
+                  })
             }
             
             

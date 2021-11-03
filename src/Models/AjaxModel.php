@@ -67,16 +67,17 @@ class AjaxModel extends Conexion  {
                 $stmt = $this->instancia->prepare($query); 
                 $stmt->bindParam(':premio_id', $resulset_premio['id']); 
                 $stmt->execute();
-                $resulset_premio = $stmt->fetch( \PDO::FETCH_ASSOC );
+                $resulset_premio_asignado = $stmt->fetch( \PDO::FETCH_ASSOC );
 
             }else{
-                $message ="El código de registro no es válido o ya fue utilizado.";
+                $resulset_premio_asignado = false;
+                $message ="El código ingresado no es válido o ya fue utilizado.";
             }
 
            
 
             $commit = $this->instancia->commit();
-            return array('status' => 'success', 'message' => $message, 'commit'=>$commit ,'consulta_codigo'=> $resulset, 'premio' => $resulset_premio);
+            return array('status' => 'success', 'message' => $message, 'commit'=>$commit ,'consulta_codigo'=> $resulset, 'premio' => $resulset_premio_asignado);
             
         }catch(\PDOException $exception){
             $this->instancia->rollBack();
