@@ -6,33 +6,14 @@ class AjaxModel extends Conexion  {
         parent::__construct();
     }
 
-    public function verify_code(object $usuario) {
+    // Actualizar tabla de ganadores con codigo canjeado
+    public function save_ganador(object $usuario, String $premioID) {
         $nombreUpper = strtoupper($usuario->nombre);
         $fechaActual = date('Y-m-d H:i:s');
-        $dias = array('domingo','lunes', 'martes', 'miercoles', 'jueves','viernes','sabado');
-        $diaActual = $dias[date("w")];
-        $aleatorio = rand(1, 100);
 
         try{
             $this->instancia->beginTransaction();  
 
-            // Obteniendo el premio aleatorio
-            $query = "SELECT id, premio, $diaActual FROM aleatorio WHERE $diaActual >= :aleatorio AND $diaActual !=0 LIMIT 1;";  
-
-            $stmt = $this->instancia->prepare($query); 
-            $stmt->bindValue(':aleatorio', $aleatorio); 
-            $stmt->execute();
-            $resulset_premio = $stmt->fetch( \PDO::FETCH_ASSOC );
-
-            // Consultar si codigo esta disponible
-            $query = "SELECT nombre, codigo, dni FROM ganadores WHERE codigo = :codigo_select AND dni = '' AND nombre = ''";  
-            $stmt = $this->instancia->prepare($query); 
-            $stmt->bindParam(':codigo_select', $usuario->codigo); 
-            $stmt->execute();
-            $resulset_codigo = $stmt->fetch( \PDO::FETCH_ASSOC );
-
-            if ($resulset_codigo) {
-                // Actualizar tabla de ganadores con codigo canjeado
                 $query = " 
                     UPDATE ganadores 
                     SET nombre = :nombre,
@@ -51,7 +32,7 @@ class AjaxModel extends Conexion  {
                 $stmt->bindParam(':telefono', $usuario->telefono); 
                 $stmt->bindParam(':fecha', $fechaActual); 
                 $stmt->bindParam(':codigo', $usuario->codigo); 
-                $stmt->bindParam(':premio_id', $resulset_premio['id']); 
+                $stmt->bindParam(':premio_id', $premioID); 
                 $stmt->execute();
                 $message ="Felicidades Ganaste!!!";
 
@@ -65,25 +46,17 @@ class AjaxModel extends Conexion  {
                 ";  
 
                 $stmt = $this->instancia->prepare($query); 
-                $stmt->bindParam(':premio_id', $resulset_premio['id']); 
+                $stmt->bindParam(':premio_id', $premioID); 
                 $stmt->execute();
                 $resulset_premio_asignado = $stmt->fetch( \PDO::FETCH_ASSOC );
 
-            }else{
-                $resulset_premio_asignado = false;
-                $message ="EN EL MOMENTO DE REGISTRAR TU CODIGO GANADOR ASEGURATE DE HACERLO DE FORMA CORRECTA TENIENDO EN CUENTA LOS CEROS LAS LETRAS O LAS LETRAS I Y L.";
-            }
-
+           
            
 
             $commit = $this->instancia->commit();
             return array('status' => 'success', 
                         'message' => $message, 
-                        'commit'=>$commit,
-                        'aleatorio' => $aleatorio, 
-                        'resulset_premio' => $resulset_premio, 
-                        'resulset_codigo'=> $resulset_codigo, 
-                        'resulset_premio_asignado' => $resulset_premio_asignado  
+                        'commit'=>$commit
                     );
             
         }catch(\PDOException $exception){
@@ -102,6 +75,61 @@ class AjaxModel extends Conexion  {
    
     }
 
+    // Retorna un premio random
+    public function getPremioRandom(String $dia, Int $numeroAleatorio) {
+        $query = " 
+            SELECT 
+                id, 
+                premio, 
+                $dia AS winrate
+            FROM 
+                aleatorio 
+            WHERE $dia >= :aleatorio AND $dia != 0 
+            LIMIT 1
+        ";
+
+        try{
+            $stmt = $this->instancia->prepare($query); 
+            $stmt->bindValue(':aleatorio', $numeroAleatorio); 
+            if($stmt->execute()){
+                $resulset = $stmt->fetchAll( \PDO::FETCH_ASSOC );
+            }else{
+                $resulset = false;
+            }
+            return $resulset;  
+
+        }catch(\PDOException $exception){
+            return array('status' => 'ERROR', 'message' => $exception->getMessage() );
+        }
+   
+    }
+
+    // Retorna un row si el codigo esta disponible
+    public function getCodigoDisponible(String $codigoPromo) {
+        $query = " 
+            SELECT 
+                nombre, 
+                codigo, 
+                dni 
+            FROM ganadores 
+            WHERE codigo = :codigoPromo AND dni = '' AND nombre = ''
+        ";
+
+        try{
+            $stmt = $this->instancia->prepare($query); 
+            $stmt->bindParam(':codigoPromo', $codigoPromo); 
+            if($stmt->execute()){
+                $resulset = $stmt->fetchAll( \PDO::FETCH_ASSOC );
+            }else{
+                $resulset = false;
+            }
+            return $resulset;  
+
+        }catch(\PDOException $exception){
+            return array('status' => 'ERROR', 'message' => $exception->getMessage() );
+        }
+   
+    }
 
     public function getConteoPremiosEntregados() {
         $query = " 
@@ -134,7 +162,6 @@ class AjaxModel extends Conexion  {
         }
    
     }
-
 
     public function searchPremios(object $usuario) {
         $query = " 

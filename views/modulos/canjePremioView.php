@@ -31,7 +31,7 @@ if (isset($_SESSION["usuario_cedula".APP_UNIQUE_KEY])){
                 <div class="row justify-content-center">
                   <div class="col-12 col-lg-9">
                     
-                    <form @submit.prevent="verify_code" method="POST">
+                    <form @submit.prevent="procesar_premio" method="POST">
                       <div>
 
                         <div class="form-group">

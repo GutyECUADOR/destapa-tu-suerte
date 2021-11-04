@@ -15,7 +15,7 @@ class Usuario {
 const app = new Vue({
     el: '#app',
     data: {
-        title: 'Evento en Vivo',
+        title: 'Canje de Premios',
         usuario: new Usuario(),
         instruccionesCanje: '',
         url_link: '',
@@ -25,7 +25,7 @@ const app = new Vue({
         },
     },
     methods:{
-        async verify_code() {
+        async procesar_premio() {
             if (!this.validateForm()) {
                 return;
             }
@@ -33,7 +33,7 @@ const app = new Vue({
             this.search_user.isloading = true;
             let formData = new FormData();
             formData.append('usuario', JSON.stringify(this.usuario));  
-            const response = await fetch(`./api/index.php?action=verify_code`, {
+            const response = await fetch(`./api/index.php?action=procesar_premio`, {
                 method: 'POST',
                 body: formData
                 })
@@ -49,7 +49,7 @@ const app = new Vue({
                 this.search_user.isAutenticated = true;
                
                 if (response.status == 'success') {
-                    this.usuario = new Usuario();
+                    //this.usuario = new Usuario();
                     this.instruccionesCanje = response.resulset_premio_asignado.instrucciones;
                     this.url_link = response.resulset_premio_asignado.url_link;
                     
@@ -63,6 +63,7 @@ const app = new Vue({
                         icon: 'success',
                         title: response.message,
                         confirmButtonText: "Aceptar",
+                        confirmButtonColor: '#1c7e16',
                         html:
                             '<b> <img src="'+ response.resulset_premio_asignado.url_imagen +'" alt="premio" style="width: 400px;height: 250px;"></b>' +
                             '<b>' + response.resulset_premio_asignado.nombre_premio + '</b>' +
@@ -81,6 +82,7 @@ const app = new Vue({
                     icon: 'warning',
                     title: 'Código no válido',
                     confirmButtonText: "Aceptar",
+                    confirmButtonColor: '#1c7e16',
                     text: response.message
                   })
             }

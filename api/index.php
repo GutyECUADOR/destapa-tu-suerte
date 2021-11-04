@@ -30,10 +30,10 @@ $dotenv->load();
     
     switch ($HTTPaction) {
 
-      case 'verify_code':
+      case 'procesar_premio':
         if (isset($_POST['usuario'])) {
           $usuario = json_decode($_POST['usuario']);
-          $rawdata = $ajaxController->verify_code($usuario);
+          $rawdata = $ajaxController->procesar_premio($usuario);
         }else{
           http_response_code(400);
           $rawdata = array('status' => 'error', 'message' => 'No se ha indicado parámetros.');
