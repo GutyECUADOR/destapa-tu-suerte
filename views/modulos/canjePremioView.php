@@ -536,12 +536,12 @@ if (isset($_SESSION["usuario_cedula".APP_UNIQUE_KEY])){
 
     
     <!-- Required vendor scripts (Do not remove) -->
-    <script type="text/javascript" src="assets/js/jquery.min.js"></script>
-    <script type="text/javascript" src="assets/js/popper.min.js"></script>
-    <script type="text/javascript" src="assets/js/bootstrap.js"></script>
-    <script type="text/javascript" src="assets/js/sweetalert2.min.js"></script>
+    <script type="text/javascript" src="assets/js/libs/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/libs/popper.min.js"></script>
+    <script type="text/javascript" src="assets/js/libs/bootstrap.js"></script>
+    <script type="text/javascript" src="assets/js/libs/sweetalert2.min.js"></script>
     
-    <script type="text/javascript" src="assets/js/jquery.fireworks-main.js"></script>
+    <script type="text/javascript" src="assets/js/libs/jquery.fireworks-main.js"></script>
 
     <script>
         $('.fireworks').fireworks();
@@ -554,5 +554,5 @@ if (isset($_SESSION["usuario_cedula".APP_UNIQUE_KEY])){
     </script>
 
     <!-- VUE y Scripts de la pagina-->
-    <script src="assets\js\vue.js"></script>
-    <script src="assets\js\pages\canjePremio.js?<?php echo date('Ymdhiiss')?>"></script>
+    <script src="assets/js/libs/vue.js"></script>
+    <script src="assets/js/pages/canjePremio.js?<?php echo date('Ymdhiiss')?>"></script>

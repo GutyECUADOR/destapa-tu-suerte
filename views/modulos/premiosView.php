@@ -164,10 +164,10 @@ $conteo_betplay = $premios[7]['cant_premios_entregados'];
 
 
 <!-- Required vendor scripts (Do not remove) -->
-<script type="text/javascript" src="assets/js/jquery.min.js"></script>
-<script type="text/javascript" src="assets/js/popper.min.js"></script>
-<script type="text/javascript" src="assets/js/bootstrap.js"></script>
-<script type="text/javascript" src="assets/js/jquery.fireworks.js"></script>
+<script type="text/javascript" src="assets/js/libs/jquery.min.js"></script>
+<script type="text/javascript" src="assets/js/libs/popper.min.js"></script>
+<script type="text/javascript" src="assets/js/libs/bootstrap.js"></script>
+<script type="text/javascript" src="assets/js/libs/jquery.fireworks.js"></script>
 
 
 <script type="text/javascript" >
