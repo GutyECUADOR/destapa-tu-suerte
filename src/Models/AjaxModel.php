@@ -6,6 +6,62 @@ class AjaxModel extends Conexion  {
         parent::__construct();
     }
 
+    // Retorna un premio random
+    public function getPremioRandom(String $dia, Int $numeroAleatorio) {
+        $query = " 
+            SELECT 
+                id, 
+                premio, 
+                $dia AS winrate
+            FROM 
+                aleatorio 
+            WHERE $dia >= :aleatorio AND $dia != 0 
+            LIMIT 1
+        ";
+
+        try{
+            $stmt = $this->instancia->prepare($query); 
+            $stmt->bindValue(':aleatorio', $numeroAleatorio); 
+            if($stmt->execute()){
+                $resulset = $stmt->fetch( \PDO::FETCH_ASSOC );
+            }else{
+                $resulset = false;
+            }
+            return $resulset;  
+
+        }catch(\PDOException $exception){
+            return array('status' => 'ERROR', 'message' => $exception->getMessage() );
+        }
+   
+    }
+
+    // Retorna un row si el codigo esta disponible
+    public function getCodigoDisponible(String $codigoPromo) {
+        $query = " 
+            SELECT 
+                nombre, 
+                codigo, 
+                dni 
+            FROM ganadores 
+            WHERE codigo = :codigoPromo AND dni = '' AND nombre = ''
+        ";
+
+        try{
+            $stmt = $this->instancia->prepare($query); 
+            $stmt->bindParam(':codigoPromo', $codigoPromo); 
+            if($stmt->execute()){
+                $resulset = $stmt->fetch( \PDO::FETCH_ASSOC );
+            }else{
+                $resulset = false;
+            }
+            return $resulset;  
+
+        }catch(\PDOException $exception){
+            return array('status' => 'ERROR', 'message' => $exception->getMessage() );
+        }
+   
+    }
+
     // Actualizar tabla de ganadores con codigo canjeado
     public function save_ganador(object $usuario, String $premioID) {
         $nombreUpper = strtoupper($usuario->nombre);
@@ -34,36 +90,33 @@ class AjaxModel extends Conexion  {
                 $stmt->bindParam(':codigo', $usuario->codigo); 
                 $stmt->bindParam(':premio_id', $premioID); 
                 $stmt->execute();
-                $message ="Felicidades Ganaste!!!";
-
-
+             
                 // Obteniendo el premio 
                 $query = "
-                    SELECT * 
-                    FROM premios 
-                    INNER JOIN ganadores ON ganadores.premio_id = premios.id
-                    WHERE premios.id = :premio_id
+                    SELECT *
+                    FROM ganadores 
+                    INNER JOIN premios ON premios.id = ganadores.premio_id
+                    WHERE codigo = :codigoPromo
                 ";  
 
                 $stmt = $this->instancia->prepare($query); 
-                $stmt->bindParam(':premio_id', $premioID); 
+                $stmt->bindParam(':codigoPromo', $usuario->codigo); 
                 $stmt->execute();
-                $resulset_premio_asignado = $stmt->fetch( \PDO::FETCH_ASSOC );
+                $response_premio = $stmt->fetch( \PDO::FETCH_ASSOC );
 
-           
-           
+            if ($this->instancia->commit()) {
+                $response = array('status' => 'success','message' => 'Felicidades Ganaste!!!', 'premio'=> $response_premio);
+            }else{
+                $response = array('status' => 'ERROR','message' => 'No se pudo registrar tu premio, reintenta. Si el problema persiste comunícate al centro de atención.');
+            }
 
-            $commit = $this->instancia->commit();
-            return array('status' => 'success', 
-                        'message' => $message, 
-                        'commit'=>$commit
-                    );
+            return $response;
             
         }catch(\PDOException $exception){
             $this->instancia->rollBack();
             switch ($exception->getCode ()) {
                 case '23000':
-                    return array('status' => 'error', 'message' => 'El número de documento de identidad ya está registrado. ', 'mensajeEx' => $exception->getMessage(), 'errorCode' => $exception->getCode () );
+                    return array('status' => 'error', 'message' => 'No se pudo registrar tu codigo. ', 'mensajeEx' => $exception->getMessage(), 'errorCode' => $exception->getCode () );
                     break;
                 
                 default:
@@ -71,62 +124,6 @@ class AjaxModel extends Conexion  {
                     break;
             }
             
-        }
-   
-    }
-
-    // Retorna un premio random
-    public function getPremioRandom(String $dia, Int $numeroAleatorio) {
-        $query = " 
-            SELECT 
-                id, 
-                premio, 
-                $dia AS winrate
-            FROM 
-                aleatorio 
-            WHERE $dia >= :aleatorio AND $dia != 0 
-            LIMIT 1
-        ";
-
-        try{
-            $stmt = $this->instancia->prepare($query); 
-            $stmt->bindValue(':aleatorio', $numeroAleatorio); 
-            if($stmt->execute()){
-                $resulset = $stmt->fetchAll( \PDO::FETCH_ASSOC );
-            }else{
-                $resulset = false;
-            }
-            return $resulset;  
-
-        }catch(\PDOException $exception){
-            return array('status' => 'ERROR', 'message' => $exception->getMessage() );
-        }
-   
-    }
-
-    // Retorna un row si el codigo esta disponible
-    public function getCodigoDisponible(String $codigoPromo) {
-        $query = " 
-            SELECT 
-                nombre, 
-                codigo, 
-                dni 
-            FROM ganadores 
-            WHERE codigo = :codigoPromo AND dni = '' AND nombre = ''
-        ";
-
-        try{
-            $stmt = $this->instancia->prepare($query); 
-            $stmt->bindParam(':codigoPromo', $codigoPromo); 
-            if($stmt->execute()){
-                $resulset = $stmt->fetchAll( \PDO::FETCH_ASSOC );
-            }else{
-                $resulset = false;
-            }
-            return $resulset;  
-
-        }catch(\PDOException $exception){
-            return array('status' => 'ERROR', 'message' => $exception->getMessage() );
         }
    
     }

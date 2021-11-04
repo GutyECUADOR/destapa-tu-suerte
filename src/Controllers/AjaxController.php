@@ -26,12 +26,13 @@ class AjaxController  {
             $isCodigoDisponible = $this->ajaxModel->getCodigoDisponible($usuario->codigo);
             if ($isCodigoDisponible) {
                 // Actualizar tabla de ganadores con codigo canjeado
-               $response = $isCodigoDisponible;
+               $response = $this->ajaxModel->save_ganador($usuario, $premioRandom['id']);
+               
             }else{
                 $response = array('status' => 'error', 'message' => "El código promocional: $usuario->codigo no es válido. En el momento de registrar tu código ganador, asegúrate de hacerlo de forma correcta teniendo en cuenta los ceros las letras o las letras i y l.", 'response'=> $isCodigoDisponible);
             }
         }else{
-            $response = array('status' => 'error', 'message' => 'No se pudo obtener un premio aleatorio.', 'response'=> $premioRandom);
+            $response = array('status' => 'error', 'message' => 'No se pudo obtener un premio aleatorio. Reintente más tarde. Si el problema persiste comunícate al centro de atención. ', 'response'=> $premioRandom);
         }
 
 

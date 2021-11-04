@@ -45,13 +45,11 @@ const app = new Vue({
                 }); 
 
                 console.log(response);
-            if (response.resulset_premio_asignado) {
-                this.search_user.isAutenticated = true;
-               
+            
                 if (response.status == 'success') {
                     //this.usuario = new Usuario();
-                    this.instruccionesCanje = response.resulset_premio_asignado.instrucciones;
-                    this.url_link = response.resulset_premio_asignado.url_link;
+                    this.instruccionesCanje = response.premio.instrucciones;
+                    this.url_link = response.premio.url_link;
                     
                     if (this.url_link) {
                         this.link = '<br><a href="'+ this.url_link +'" target="_blank">Clic Aqui </a> '
@@ -65,27 +63,24 @@ const app = new Vue({
                         confirmButtonText: "Aceptar",
                         confirmButtonColor: '#1c7e16',
                         html:
-                            '<b> <img src="'+ response.resulset_premio_asignado.url_imagen +'" alt="premio" style="width: 400px;height: 250px;"></b>' +
-                            '<b>' + response.resulset_premio_asignado.nombre_premio + '</b>' +
+                            '<b> <img src="'+ response.premio.url_imagen +'" alt="premio" style="width: 400px;height: 250px;"></b>' +
+                            '<b>' + response.premio.nombre_premio + '</b>' +
                             '<br><div style="font-size:14px">' +  this.instruccionesCanje + '</div>' +
                             this.link
                       })
 
                    
                 }else{
-                    alert(data.mensaje  + 'Si el problema persiste. Comuniquese a nuestro centro a atencion al cliente.');
-                   
+                  
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Código no válido',
+                        confirmButtonText: "Aceptar",
+                        confirmButtonColor: '#1c7e16',
+                        text: response.message
+                    })
                 }
-            }else{
-                this.search_user.isAutenticated = false;
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Código no válido',
-                    confirmButtonText: "Aceptar",
-                    confirmButtonColor: '#1c7e16',
-                    text: response.message
-                  })
-            }
+           
             
             
             
