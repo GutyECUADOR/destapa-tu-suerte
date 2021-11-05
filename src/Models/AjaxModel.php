@@ -8,14 +8,16 @@ class AjaxModel extends Conexion  {
 
     // Retorna un premio random
     public function getPremioRandom(String $dia, Int $numeroAleatorio) {
-        $query = " 
+        $query = "
             SELECT 
-                id, 
-                premio, 
-                $dia AS winrate
+                aleatorio.id, 
+                aleatorio.premio, 
+                aleatorio.$dia AS winrate_range,
+                cant_premios AS disponibles,
+                (SELECT COUNT(premio_id) FROM ganadores WHERE premio_id= aleatorio.id ) AS entregados
             FROM 
                 aleatorio 
-            WHERE $dia >= :aleatorio AND $dia != 0 
+            WHERE aleatorio.$dia >= :aleatorio AND aleatorio.$dia !=0 
             LIMIT 1
         ";
 

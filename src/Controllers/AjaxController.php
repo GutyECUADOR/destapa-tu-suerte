@@ -21,6 +21,8 @@ class AjaxController  {
 
         // Obtenemos premio random segun el dia
         $premioRandom = $this->ajaxModel->getPremioRandom($diaActual, $numeroAleatorio);
+        
+
         if ($premioRandom) {
             // Verificamos si codigo ingresado esta disponible
             $isCodigoDisponible = $this->ajaxModel->getCodigoDisponible($usuario->codigo);
@@ -36,7 +38,7 @@ class AjaxController  {
         }
 
 
-        return $response; //$this->ajaxModel->verify_code($usuario);
+        return $response; 
     }
 
     public function searchPremios(object $usuario){
