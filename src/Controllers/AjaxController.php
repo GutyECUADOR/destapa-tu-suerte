@@ -17,10 +17,16 @@ class AjaxController  {
 
     public function procesar_premio(object $usuario){
         $diaActual = $this->dias[date("w")];
-        $numeroAleatorio = rand(1, 100);
-
+        $intentos = 0;
         // Obtenemos premio random segun el dia
-        $premioRandom = $this->ajaxModel->getPremioRandom($diaActual, $numeroAleatorio);
+        do {
+            $numeroAleatorio = rand(1, 100);
+            $premioRandom = $this->ajaxModel->getPremioRandom($diaActual, $numeroAleatorio);
+            $intentos++;
+            if ($intentos >= 4) {
+                return $response = array('status' => 'error', 'message' => "No existen más premios disponibles para este dia: $diaActual, intentalo el día de mañana");
+            }
+        } while ($premioRandom['disponibles'] <= $premioRandom['entregados']); // Repetir mientras los entregados sean mayores o iguales a los disponibles
         
 
         if ($premioRandom) {
