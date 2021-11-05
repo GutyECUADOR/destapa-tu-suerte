@@ -69,7 +69,7 @@ $conteo_betplay = $premios[7]['cant_premios_entregados'];
 
                     <div class="row justify-content-center mb-4">
                         <div class="col-12 col-md-6 col-lg-6 text-center">
-                            <img src="assets/img/5sured.png" alt="Promo" style="max-height: 100px;" >
+                            <img src="assets/img/5sured-blanco.png" alt="Promo" style="max-height: 100px;" >
                             <h2 class="text-center text-white mb-3" style="color: #fff !important; font-weight: bold; font-size: 1.5rem; margin-bottom: 0px!important;">
                                 500 Bonos o giros SURED en dinero por cien mil pesos cada uno (100.000 COP). 
                             </h2>
@@ -80,7 +80,7 @@ $conteo_betplay = $premios[7]['cant_premios_entregados'];
                         </div>
 
                         <div class="col-12 col-md-6 col-lg-6 text-center">
-                            <img src="assets/img/6amazon.png" alt="premios" style="max-height: 100px;">
+                            <img src="assets/img/6amazon-blanco.png" alt="premios" style="max-height: 100px;">
                             <h2 class="text-center text-white mb-3" style="color: #fff !important; font-weight: bold; font-size: 1.5rem; margin-bottom: 0px!important;">
                                 1.500 cuentas Amazon Prime (por 1 mes)
                             </h2>
@@ -104,7 +104,7 @@ $conteo_betplay = $premios[7]['cant_premios_entregados'];
                         </div>
 
                         <div class="col-12 col-md-6 col-lg-6 text-center">
-                            <img src="assets/img/8betplay.png" alt="premios" style="max-height: 100px;">
+                            <img src="assets/img/8betplay-blanco.png" alt="premios" style="max-height: 100px;">
                             <h2 class="text-center text-white mb-3" style="color: #fff !important; font-weight: bold; font-size: 1.5rem; margin-bottom: 0px!important;">
                             298.500   recargas para apuestas BETPLAY por valor de Cinco mil pesos ($5.000) cada una 
                             </h2>

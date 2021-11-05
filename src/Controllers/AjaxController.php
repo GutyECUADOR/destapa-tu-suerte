@@ -23,12 +23,11 @@ class AjaxController  {
             $numeroAleatorio = rand(1, 100);
             $premioRandom = $this->ajaxModel->getPremioRandom($diaActual, $numeroAleatorio);
             $intentos++;
-            if ($intentos >= 4) {
-                return $response = array('status' => 'error', 'message' => "No existen más premios disponibles para este dia: $diaActual, intentalo el día de mañana");
+            if ($intentos >= 10) {
+                return $response = array('status' => 'error', 'message' => "Gracias por participar, tu tapa no ha sido premiada, sigue intentándolo hay espectaculares premios que puedes ganar.");
             }
         } while ($premioRandom['disponibles'] <= $premioRandom['entregados']); // Repetir mientras los entregados sean mayores o iguales a los disponibles
         
-
         if ($premioRandom) {
             // Verificamos si codigo ingresado esta disponible
             $isCodigoDisponible = $this->ajaxModel->getCodigoDisponible($usuario->codigo);

@@ -57,17 +57,53 @@ const app = new Vue({
                         this.link = '';
                     }
 
-                    Swal.fire({
-                        icon: 'success',
-                        title: response.message,
-                        confirmButtonText: "Aceptar",
-                        confirmButtonColor: '#1c7e16',
-                        html:
-                            '<b> <img src="'+ response.premio.url_imagen +'" alt="premio" style="width: 400px;height: 250px;"></b>' +
-                            '<b>' + response.premio.nombre_premio + '</b>' +
-                            '<br><div style="font-size:14px">' +  this.instruccionesCanje + '</div>' +
-                            this.link
-                      })
+                    if (response.premio.premio_id == 7) {
+                        const { value: formValues } = await Swal.fire({
+                            icon: 'success',
+                            title: response.message,
+                            confirmButtonText: "Aceptar",
+                            confirmButtonColor: '#1c7e16',
+                            html:
+                                '<b> <img src="'+ response.premio.url_imagen +'" alt="premio" style="width: 90%;height: 250px;"></b>' +
+                                '<b>' + response.premio.nombre_premio + '</b>' +
+                                '<br><div style="font-size:14px">' +
+                                '<br><label>Ingrese Número de Teléfono Celular</label>' +
+                                '<input id="swal-input-number" class="swal2-input">' +
+                                '<br><label style="color: red;margin-top: 5px;font-size: 12px;">Puedes dejar el campo teléfono en blanco y agregarlo después en tu perfil, después de agregarlo no puedes cambiarlo ni corregirlo.</label>' +
+                                '<br><label style="margin-top: 10px;">Ingrese Nombre de la Operadora (Tiggo, Claro, Movistar, etc)</label>' +
+                                '<select id="swal-input-operadora" class="swal2-input">'+
+                                    '+<option value="Tiggo" selected>Tiggo</option>'+
+                                    '+<option value="Claro" >Claro</option>'+
+                                    '+<option value="Movistar">Movistar</option>'+
+                                '</select>' +
+                                '</div>',
+                            focusConfirm: false,
+                            preConfirm: () => {
+                              return [
+                                document.getElementById('swal-input-number').value,
+                                document.getElementById('swal-input-operadora').value
+                              ]
+                            }
+                          })
+                          
+                          if (formValues) {
+                            Swal.fire(JSON.stringify(formValues))
+                          }
+                    }else{
+                        Swal.fire({
+                            icon: 'success',
+                            title: response.message,
+                            confirmButtonText: "Aceptar",
+                            confirmButtonColor: '#1c7e16',
+                            html:
+                                '<b> <img src="'+ response.premio.url_imagen +'" alt="premio" style="width: 90%;height: 250px;"></b>' +
+                                '<b>' + response.premio.nombre_premio + '</b>' +
+                                '<br><div style="font-size:14px">' +  this.instruccionesCanje + '</div>' +
+                                this.link
+                          })
+                    }
+
+                    
 
                    
                 }else{
@@ -102,6 +138,9 @@ const app = new Vue({
                 return false;
             }
             return true;
+        }, 
+        async updateRecargaData(recargadata){
+
         }
     },
     mounted(){
