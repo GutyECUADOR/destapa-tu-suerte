@@ -79,15 +79,16 @@ const app = new Vue({
                                 '</div>',
                             focusConfirm: false,
                             preConfirm: () => {
-                              return [
-                                document.getElementById('swal-input-number').value,
-                                document.getElementById('swal-input-operadora').value
-                              ]
+                              return {
+                                  telefono: document.getElementById('swal-input-number').value,
+                                  operadora: document.getElementById('swal-input-operadora').value,
+                                  codigo: response.premio.codigo
+                              }
                             }
                           })
                           
                           if (formValues) {
-                            Swal.fire(JSON.stringify(formValues))
+                            this.updateRecargaData(formValues);
                           }
                     }else{
                         Swal.fire({
@@ -98,8 +99,7 @@ const app = new Vue({
                             html:
                                 '<b> <img src="'+ response.premio.url_imagen +'" alt="premio" style="width: 90%;height: 250px;"></b>' +
                                 '<b>' + response.premio.nombre_premio + '</b>' +
-                                '<br><div style="font-size:14px">' +  this.instruccionesCanje + '</div>' +
-                                this.link
+                                '<br><div style="font-size:14px">' +  this.instruccionesCanje + '</div>'
                           })
                     }
 
@@ -140,7 +140,38 @@ const app = new Vue({
             return true;
         }, 
         async updateRecargaData(recargadata){
+            let formData = new FormData();
+            formData.append('recargadata', JSON.stringify(recargadata));  
+            const response = await fetch(`./api/index.php?action=updateRecargaData`, {
+                method: 'POST',
+                body: formData
+                })
+                .then(response => {
+                    this.search_user.isloading = false
+                    return response.json();
+                }).catch( error => {
+                    console.error(error);
+                }); 
 
+            if (response.status == 'success') {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Realizado',
+                    confirmButtonText: "Aceptar",
+                    confirmButtonColor: '#1c7e16',
+                    text: response.message
+                  })
+            }else{
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Hubo un problema en el registro',
+                    confirmButtonText: "Aceptar",
+                    confirmButtonColor: '#1c7e16',
+                    text: response.message
+                  })
+            }
+
+            
         }
     },
     mounted(){

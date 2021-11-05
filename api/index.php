@@ -42,6 +42,18 @@ $dotenv->load();
 
       break;
 
+      case 'updateRecargaData':
+        if (isset($_POST['recargadata'])) {
+          $recargadata = json_decode($_POST['recargadata']);
+          $rawdata =  $ajaxController->updateRecargaData($recargadata); 
+        }else{ 
+          http_response_code(400);
+          $rawdata = array('status' => 'error', 'message' => 'No se ha indicado parámetros de registro.');
+        }
+        echo json_encode($rawdata);
+
+      break;
+
       case 'searchPremios':
         if (isset($_POST['usuario'])) {
           $usuario = json_decode($_POST['usuario']);

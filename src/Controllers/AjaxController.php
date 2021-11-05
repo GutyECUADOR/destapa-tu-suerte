@@ -54,6 +54,10 @@ class AjaxController  {
         return $this->ajaxModel->getConteoPremiosEntregados();
     }
 
+    public function updateRecargaData(object $recargaData){
+        return $this->ajaxModel->updateRecargaData($recargaData);
+    }
+
     
 
 }
