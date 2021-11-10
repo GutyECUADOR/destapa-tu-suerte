@@ -54,6 +54,18 @@ $dotenv->load();
 
       break;
 
+      case 'getBetPlayCode':
+        if (isset($_POST['dni'])) {
+          $dni = json_decode($_POST['dni']);
+          $rawdata =  $ajaxController->getBetPlayCode($dni); 
+        }else{ 
+          http_response_code(400);
+          $rawdata = array('status' => 'error', 'message' => 'No se ha indicado parámetros de registro.');
+        }
+        echo json_encode($rawdata);
+
+      break;
+
       case 'searchPremios':
         if (isset($_POST['usuario'])) {
           $usuario = json_decode($_POST['usuario']);
