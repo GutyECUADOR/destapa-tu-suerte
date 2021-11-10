@@ -45,7 +45,7 @@ class AjaxModel extends Conexion  {
                 codigo, 
                 dni 
             FROM ganadores 
-            WHERE codigo = :codigoPromo AND dni = '' AND nombre = ''
+            WHERE codigo = :codigoPromo
         ";
 
         try{

@@ -31,10 +31,11 @@ class AjaxController  {
         if ($premioRandom) {
             // Verificamos si codigo ingresado esta disponible
             $isCodigoDisponible = $this->ajaxModel->getCodigoDisponible($usuario->codigo);
-            if ($isCodigoDisponible) {
+            if ($isCodigoDisponible && strlen($isCodigoDisponible['nombre']) == 0 && strlen($isCodigoDisponible['dni']) == 0) {
                 // Actualizar tabla de ganadores con codigo canjeado
                $response = $this->ajaxModel->save_ganador($usuario, $premioRandom['id']);
-               
+            }elseif ($isCodigoDisponible && (strlen($isCodigoDisponible['nombre']) > 0 || strlen($isCodigoDisponible['dni']) > 0)){
+                $response = array('status' => 'error', 'message' => "El código promocional: $usuario->codigo ya ha sido utilizado.", 'response'=> $isCodigoDisponible);
             }else{
                 $response = array('status' => 'error', 'message' => "El código promocional: $usuario->codigo no es válido. En el momento de registrar tu código ganador, asegúrate de hacerlo de forma correcta teniendo en cuenta los ceros las letras o las letras i y l.", 'response'=> $isCodigoDisponible);
             }
