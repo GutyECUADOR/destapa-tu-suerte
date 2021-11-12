@@ -74,12 +74,25 @@ class AjaxModel extends Conexion  {
     // Actualizar tabla de ganadores con codigo canjeado
     public function save_ganador(object $usuario, String $premioID) {
         $nombreUpper = strtoupper($this->replaceAccents($usuario->nombre));
-
-
         $fechaActual = date('Y-m-d H:i:s');
 
         try{
             $this->instancia->beginTransaction();  
+
+                // Verificar si existen más de 5 betplay canjeados por el mismo usuario
+                $query = "
+                    SELECT COUNT(*) AS TOTAL FROM ganadores WHERE dni = :dni AND premio_id = :premoID
+                ";  
+
+                $stmt = $this->instancia->prepare($query); 
+                $stmt->bindParam(':dni', $usuario->cedula); 
+                $stmt->bindParam(':premoID', $premioID); 
+                $stmt->execute();
+                $response_betplay = $stmt->fetch( \PDO::FETCH_ASSOC );
+
+                if ($response_betplay['TOTAL'] >=5) {
+                    $premioID = 6; // ID 6 amazon prime
+                }
 
                 $query = " 
                     UPDATE ganadores 
@@ -205,7 +218,7 @@ class AjaxModel extends Conexion  {
 
                 // Verificamos si ya se registro un telefono
                 $query = " 
-                    SELECT * FROM ganadores WHERE codigo= :codigoPromo AND (telefono_recarga = '' OR telefono_recarga = NULL)
+                    SELECT * FROM ganadores WHERE codigo= :codigoPromo AND (telefono_recarga = '' OR telefono_recarga IS NULL)
                 "
                 ;  
                 $stmt = $this->instancia->prepare($query); 
