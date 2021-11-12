@@ -48,7 +48,7 @@
                       </form>
 
                       <div class="col-12 justify-content-center text-center">
-                        <h5 class="tertiary-color mt-2 pb-2">Se encontraron {{ search_user.premios.length }} premios.</h5>
+                        <h5 class="tertiary-color mt-2 pb-2">{{ search_user.premios[0]?.nombre || 'Anónimo' }} te has ganado {{ search_user.premios.length }} premios !</h5>
                       </div>
 
                       <table class="table table-responsive"> 
