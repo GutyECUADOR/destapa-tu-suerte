@@ -67,7 +67,8 @@
                                   <td>
                                     <div v-html="premio.instrucciones">
                                     </div>
-                                    <a :href="premio.url_link" target="_blank" class="btn btn-primary btn-block">Clic Aqui </a> 
+                                    <button v-if="premio.id==7&&premio.telefono_recarga.length<=0" @click="registrarTelefono(premio)" class="btn btn-success btn-block">Registrar Teléfono para recarga</button>
+                                    
                                   </td>
                               </tr>
                           </tbody>

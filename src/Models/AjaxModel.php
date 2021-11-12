@@ -203,22 +203,38 @@ class AjaxModel extends Conexion  {
         try{
             $this->instancia->beginTransaction();  
 
+                // Verificamos si ya se registro un telefono
                 $query = " 
+                    SELECT * FROM ganadores WHERE codigo= :codigoPromo AND (telefono_recarga = '' OR telefono_recarga = NULL)
+                "
+                ;  
+                $stmt = $this->instancia->prepare($query); 
+                $stmt->bindParam(':codigoPromo', $recargaData->codigo); 
+                $stmt->execute();
+                $resulset_telefono = $stmt->fetch( \PDO::FETCH_ASSOC );
+
+                if ($resulset_telefono) {
+                    $query = " 
                     UPDATE ganadores 
                     SET
                         telefono_recarga = :telefono_recarga,
                         operadora_recarga = :operadora_recarga
                     WHERE codigo = :codigoPromo
                     "
-                ;  
-                $stmt = $this->instancia->prepare($query); 
-                $stmt->bindParam(':telefono_recarga', $recargaData->telefono); 
-                $stmt->bindParam(':operadora_recarga', $operadoraUpper); 
-                $stmt->bindParam(':codigoPromo', $recargaData->codigo); 
-                $stmt->execute();
+                    ;  
+                    $stmt = $this->instancia->prepare($query); 
+                    $stmt->bindParam(':telefono_recarga', $recargaData->telefono); 
+                    $stmt->bindParam(':operadora_recarga', $operadoraUpper); 
+                    $stmt->bindParam(':codigoPromo', $recargaData->codigo); 
+                    $stmt->execute();
+                }
+
+                $this->instancia->commit();
              
-            if ($this->instancia->commit()) {
-                $response = array('status' => 'success','message' => 'Datos de recarga registrados.');
+            if ($resulset_telefono) {
+                $response = array('status' => 'success','message' => 'Datos de recarga registrados Tu recarga será efectiva en máximo 72 horas.');
+            }elseif (!$resulset_telefono) {
+                $response = array('status' => 'ERROR','message' => 'Ya has registrado un número de telefono previamente.');
             }else{
                 $response = array('status' => 'ERROR','message' => 'No se pudo registrar los datos de tu recarga, Registra tus datos desde la MI PERFIL. Si el problema persiste comunícate al centro de atención.');
             }
