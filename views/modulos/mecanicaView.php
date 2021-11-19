@@ -14,7 +14,7 @@
 
                     <div class="row justify-content-center">
                         <div class="col-12 col-md-10 col-lg-6 text-center">
-                            <img src="assets/img/BOTELLAS_Mesa de trabajo 1.png" alt="premios" class="img-responsive w-75 zoom">
+                            <img src="assets/img/BOTELLAS_Mesa-de-trabajo-1.png" alt="premios" class="img-responsive w-75 zoom">
                         </div>
                     </div>
 
