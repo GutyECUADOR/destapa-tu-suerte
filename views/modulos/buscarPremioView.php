@@ -77,7 +77,7 @@
                                       <p style="text-align: left;">4. Si tienes alguna duda o inconveniente en la plataforma de Betplay comunicate con (l&iacute;nea 018000112188 o correo ayuda.corredor@cempresarial.co.</p>
                                     </div>
 
-                                    <button v-if="premio.id==7&&premio.telefono_recarga==''" @click="registrarTelefono(premio)" class="btn btn-success btn-block">Registrar Teléfono para recarga</button>
+                                    <button v-if="premio.premio_id==7&&premio.telefono_recarga==''" @click="registrarTelefono(premio)" class="btn btn-success btn-block">Registrar Teléfono para recarga</button>
                                     
                                   </td>
                               </tr>
