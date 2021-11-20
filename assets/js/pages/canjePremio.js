@@ -47,7 +47,7 @@ const app = new Vue({
                 console.log(response);
             
                 if (response.status == 'success') {
-                    //this.usuario = new Usuario();
+                    this.usuario = new Usuario(); //Resetea el formulario al enviar
                     this.instruccionesCanje = response.premio.instrucciones;
                     this.url_link = response.premio.url_link;
                     
@@ -64,7 +64,7 @@ const app = new Vue({
                             confirmButtonText: "Aceptar",
                             confirmButtonColor: '#1c7e16',
                             html:
-                                '<b> <img src="'+ response.premio.url_imagen +'" alt="premio" style="width: 90%;height: 250px;"></b>' +
+                                '<b> <img src="'+ response.premio.url_imagen +'" alt="premio" style="width: 90%"></b>' +
                                 '<b>' + response.premio.nombre_premio + '</b>' +
                                 '<br><div style="font-size:14px">' +
                                 '<br><label>Ingrese Número de Teléfono Celular</label>' +
@@ -72,9 +72,16 @@ const app = new Vue({
                                 '<br><label style="color: red;margin-top: 5px;font-size: 12px;">Puedes dejar el campo teléfono en blanco y agregarlo después en tu perfil, después de agregarlo no puedes cambiarlo ni corregirlo.</label>' +
                                 '<br><label style="margin-top: 10px;">Ingrese Nombre de la Operadora (Tiggo, Claro, Movistar, etc)</label>' +
                                 '<select id="swal-input-operadora" class="swal2-input">'+
-                                    '+<option value="Tiggo" selected>Tiggo</option>'+
+                                    '+<option value="Avantel" selected>Avantel</option>'+
                                     '+<option value="Claro" >Claro</option>'+
+                                    '+<option value="ETB">ETB</option>'+
+                                    '+<option value="FlashMobile">FlashMobile</option>'+
+                                    '+<option value="Kalley">Kalley</option>'+
+                                    '+<option value="MovilExito">MovilExito</option>'+
                                     '+<option value="Movistar">Movistar</option>'+
+                                    '+<option value="Tigo">Tigo</option>'+
+                                    '+<option value="Virgin">Virgin</option>'+
+                                    '+<option value="WOM">WOM</option>'+
                                 '</select>' +
                                 '</div>',
                             focusConfirm: false,

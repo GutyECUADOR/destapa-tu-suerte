@@ -71,7 +71,7 @@ $conteo_betplay = $premios[7]['cant_premios_entregados'];
                         <div class="col-12 col-md-6 col-lg-6 text-center">
                             <img src="assets/img/LogoExito.png" alt="Promo" style="max-height: 100px;" >
                             <h2 class="text-center text-white mb-3" style="color: #fff !important; font-weight: bold; font-size: 1.5rem; margin-bottom: 0px!important;">
-                                500 Bonos o giros EXITO en dinero por cien mil pesos cada uno (100.000 COP). 
+                                500 Bonos EXITO por cien mil pesos cada uno, para que hagas compras en cualquier almacén de la cadena (100.000 COP).
                             </h2>
                             <span class="text-center text-white mb-3" style="color: #fff !important; font-weight: bold; font-size: 1.5rem; margin-bottom: 0px!important;">
                                 <span style="color:yellow"><?php echo $conteo_sured?></span> de 500 entregadas

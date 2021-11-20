@@ -66,7 +66,7 @@ const app = new Vue({
                 confirmButtonText: "Aceptar",
                 confirmButtonColor: '#1c7e16',
                 html:
-                    '<b> <img src="'+ premio.url_imagen +'" alt="premio" style="width: 90%;height: 250px;"></b>' +
+                    '<b> <img src="'+ premio.url_imagen +'" alt="premio" style="width: 90%;"></b>' +
                     '<b>' + premio.nombre_premio + '</b>' +
                     '<br><div style="font-size:14px">' +
                     '<br><label>Ingrese Número de Teléfono Celular</label>' +
@@ -74,9 +74,16 @@ const app = new Vue({
                     '<br><label style="color: red;margin-top: 5px;font-size: 12px;">Puedes dejar el campo teléfono en blanco y agregarlo después en tu perfil, después de agregarlo no puedes cambiarlo ni corregirlo.</label>' +
                     '<br><label style="margin-top: 10px;">Ingrese Nombre de la Operadora (Tiggo, Claro, Movistar, etc)</label>' +
                     '<select id="swal-input-operadora" class="swal2-input">'+
-                        '+<option value="Tiggo" selected>Tiggo</option>'+
+                        '+<option value="Avantel" selected>Avantel</option>'+
                         '+<option value="Claro" >Claro</option>'+
+                        '+<option value="ETB">ETB</option>'+
+                        '+<option value="FlashMobile">FlashMobile</option>'+
+                        '+<option value="Kalley">Kalley</option>'+
+                        '+<option value="MovilExito">MovilExito</option>'+
                         '+<option value="Movistar">Movistar</option>'+
+                        '+<option value="Tigo">Tigo</option>'+
+                        '+<option value="Virgin">Virgin</option>'+
+                        '+<option value="WOM">WOM</option>'+
                     '</select>' +
                     '</div>',
                 focusConfirm: false,
@@ -141,8 +148,13 @@ const app = new Vue({
                 }).catch( error => {
                     console.error(error);
                 }); 
+            console.log(response.codigobetpay);
             return response.codigobetpay; 
         }, 
+        showcode(dni){
+            let codigo = this.getBetPlayCode(dni);
+            return codigo;
+        },
         CopyToClipboard(){
             var r = document.createRange();
             r.selectNode(document.getElementById('codigobetplay'));
