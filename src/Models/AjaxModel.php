@@ -247,7 +247,9 @@ class AjaxModel extends Conexion  {
 
                 $this->instancia->commit();
              
-            if ($resulset_telefono) {
+            if($resulset_telefono && $recargaData->telefono=='') {
+                $response = array('status' => 'ERROR','message' => 'El número de telefono debe contener 10 digitos, no se ha registrado el número, pero puedes registrarlo en tu perfil.');
+            }elseif ($resulset_telefono) {
                 $response = array('status' => 'success','message' => 'Datos de recarga registrados Tu recarga será efectiva en máximo 72 horas.');
             }elseif (!$resulset_telefono) {
                 $response = array('status' => 'ERROR','message' => 'Ya has registrado un número de telefono previamente.');
