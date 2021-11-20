@@ -87,16 +87,11 @@ const app = new Vue({
                             }
                           })
                           
-                          if (formValues && formValues.telefono.length == 10) {
+                          if (formValues) {
+                              if (formValues.telefono.length != 10) {
+                                formValues.telefono = '';
+                              }
                             this.updateRecargaData(formValues);
-                          }else{
-                            Swal.fire({
-                                icon: 'warning',
-                                title: 'Número de telefono incorrecto',
-                                confirmButtonText: "Aceptar",
-                                confirmButtonColor: '#1c7e16',
-                                text: 'El número de telefono debe tener 10 digitos'
-                            })
                           }
                     }else if (response.premio.premio_id == 8) {
                         const codigoBetplay = await this.getBetPlayCode(response.premio.dni);

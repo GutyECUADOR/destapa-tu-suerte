@@ -90,8 +90,11 @@ const app = new Vue({
               })
               
               if (formValues) {
-                this.updateRecargaData(formValues);
-              } 
+                if (formValues.telefono.length != 10) {
+                  formValues.telefono = '';
+                }
+              this.updateRecargaData(formValues);
+            }
         },
         async updateRecargaData(recargadata){
             let formData = new FormData();

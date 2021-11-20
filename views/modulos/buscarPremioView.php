@@ -67,7 +67,7 @@
                                   <td>
                                     <div v-html="premio.instrucciones">
                                     </div>
-                                    <button v-if="premio.id==7&&premio.telefono_recarga==null" @click="registrarTelefono(premio)" class="btn btn-success btn-block">Registrar Teléfono para recarga</button>
+                                    <button v-if="premio.id==7&&premio.telefono_recarga==''" @click="registrarTelefono(premio)" class="btn btn-success btn-block">Registrar Teléfono para recarga</button>
                                     
                                   </td>
                               </tr>
