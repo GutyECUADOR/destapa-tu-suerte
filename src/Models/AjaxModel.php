@@ -79,19 +79,22 @@ class AjaxModel extends Conexion  {
         try{
             $this->instancia->beginTransaction();  
 
-                // Verificar si existen más de 5 betplay canjeados por el mismo usuario
-                $query = "
-                    SELECT COUNT(*) AS TOTAL FROM ganadores WHERE dni = :dni AND premio_id = :premoID
-                ";  
+                if ($premioID == '8') {
+                    
+                    // Verificar si existen más de 5 betplay canjeados por el mismo usuario
+                    $query = "
+                        SELECT COUNT(*) AS TOTAL FROM ganadores WHERE dni = :dni AND premio_id = :premoID
+                    ";  
 
-                $stmt = $this->instancia->prepare($query); 
-                $stmt->bindParam(':dni', $usuario->cedula); 
-                $stmt->bindParam(':premoID', $premioID); 
-                $stmt->execute();
-                $response_betplay = $stmt->fetch( \PDO::FETCH_ASSOC );
+                    $stmt = $this->instancia->prepare($query); 
+                    $stmt->bindParam(':dni', $usuario->cedula); 
+                    $stmt->bindParam(':premoID', $premioID); 
+                    $stmt->execute();
+                    $response_betplay = $stmt->fetch( \PDO::FETCH_ASSOC );
 
-                if ($response_betplay['TOTAL'] >=5) {
-                    $premioID = 6; // ID 6 amazon prime
+                    if ($response_betplay['TOTAL'] >=5) {
+                        $premioID = 6;  // ID 6 amazon prime
+                    }
                 }
 
                 $query = " 
