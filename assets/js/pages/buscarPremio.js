@@ -128,6 +128,28 @@ const app = new Vue({
             }
 
             
+        },
+        async getBetPlayCode(dni){
+            let formData = new FormData();
+            formData.append('dni', JSON.stringify({'dni': dni}));  
+            const response = await fetch(`./api/index.php?action=getBetPlayCode`, {
+                method: 'POST',
+                body: formData
+                })
+                .then(response => {
+                    return response.json();
+                }).catch( error => {
+                    console.error(error);
+                }); 
+            return response.codigobetpay; 
+        }, 
+        CopyToClipboard(){
+            var r = document.createRange();
+            r.selectNode(document.getElementById('codigobetplay'));
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(r);
+            document.execCommand('copy');
+            window.getSelection().removeAllRanges();
         }
     },
     mounted(){

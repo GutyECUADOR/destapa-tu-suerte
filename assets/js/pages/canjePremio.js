@@ -109,9 +109,12 @@ const app = new Vue({
                             html:
                                 '<b> <img src="'+ response.premio.url_imagen +'" alt="premio" style="width: 90%;"></b>' +
                                 '<b>' + response.premio.nombre_premio + '</b>' +
-                                '<br><div style="font-size:14px">' +  this.instruccionesCanje + '</div>' +
-                                '<br><div style="font-size:14px; color:red"> Toma nota de tu código: </div>' +
-                                '<br><div style="font-size:20px; color:green">' +  msg_betplay + '</div>'
+                                '<p style="text-align: left; margin-top: 10px;">Felicitaciones ganaste un bono de $5000 para apuestas deportivas en linea en la plataforma Betplay<br />Sigue las siguientes indicaciones para hacer efectivo tu bono.<br />1. Si no estas registrado aun en la plataforma de Betplay, registrate.</p>'+
+                                '<p style="margin-top: 10px; text-align: center;"><a href="https://betplay.com.co/registrarse" target="_blank">Reg&iacute;strate</a><br /><a href="https://www.youtube.com/watch?v=dj6ZAko1tB8&amp;ab_channel=BetPlay" target="_blank">Video Explicativo</a></p>'+
+                                '<p style="margin-top: 10px;">2. Ingresa a tu cuenta y redime tu bono de $5000 para apuestas deportivas con este c&oacute;digo: <div id="codigobetplay" onclick="CopyToClipboard();return false;" style="font-size:20px; color:green">'+ msg_betplay  +'</div></p>'+
+                                '<p style="margin-top: 10px;">3. Apuesta desde 500 pesos en nuestra plataforma y podr&aacute;s ganar hasta 500 millones de pesos<br />aplican t&eacute;rminos y condiciones&nbsp;</p>'+
+                                '<p style="margin-top: 10px; text-align: center;"><a href="https://apicrm.betplay.com.co/terms/Terminos%20y%20condiciones%20202111.pdf" target="_blank" rel="noopener">T&eacute;rminos &amp; Condiciones</a></p>'+
+                                '<p style="text-align: left;">4. Si tienes alguna duda o inconveniente en la plataforma de Betplay comunicate con (l&iacute;nea 018000112188 o correo ayuda.corredor@cempresarial.co.</p>'
                           })
                     }else{
                         Swal.fire({
@@ -208,6 +211,14 @@ const app = new Vue({
                     console.error(error);
                 }); 
             return response; 
+        }, 
+        CopyToClipboard(){
+            var r = document.createRange();
+            r.selectNode(document.getElementById('codigobetplay'));
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(r);
+            document.execCommand('copy');
+            window.getSelection().removeAllRanges();
         }
     },
     mounted(){
