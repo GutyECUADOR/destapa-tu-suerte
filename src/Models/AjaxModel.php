@@ -189,8 +189,15 @@ class AjaxModel extends Conexion  {
 
     public function searchPremios(object $usuario) {
         $query = " 
-            SELECT * FROM ganadores
+            SELECT 
+                ganadores.*, 
+                premios.*,  
+                betplaycodes.id,
+                betplaycodes.codigo AS betplaycode,
+                betplaycodes.isCanjeado
+            FROM ganadores
             INNER JOIN premios ON ganadores.premio_id = premios.id
+            LEFT JOIN betplaycodes ON betplaycodes.codigoCanjeado = ganadores.codigo 
             WHERE dni = :dni AND telefono = :telefono ORDER BY fecha ASC
         ";
 
@@ -275,35 +282,40 @@ class AjaxModel extends Conexion  {
    
     }
 
-    public function getBetPlayCode(object $dniObject) {
+    public function getBetPlayCode(object $usuarioObject) {
         try{
             $this->instancia->beginTransaction();  
 
+                //Verificamos si existe el DNI del ganador
                 $query = "
                     SELECT * FROM ganadores WHERE dni = :dni LIMIT 1
                 ";  
 
                 $stmt = $this->instancia->prepare($query); 
-                $stmt->bindParam(':dni', $dniObject->dni); 
+                $stmt->bindParam(':dni', $usuarioObject->cedula); 
                 $stmt->execute();
                 $response_ganador = $stmt->fetch( \PDO::FETCH_ASSOC );
 
+                // Obtenemos un codigo de Betplay vacio
                 $query = "
                     SELECT * FROM betplaycodes WHERE isCanjeado = '' OR isCanjeado IS NULL LIMIT 1
                 ";  
 
                 $stmt = $this->instancia->prepare($query); 
-                $stmt->bindParam(':dni', $dniObject->dni); 
                 $stmt->execute();
                 $codigo_disponible = $stmt->fetch( \PDO::FETCH_ASSOC );
 
                 if ($response_ganador && $codigo_disponible) {
                     $query = " 
-                        UPDATE betplaycodes SET isCanjeado = :ganador WHERE codigo = :codigo
+                        UPDATE betplaycodes 
+                            SET isCanjeado = :ganador,
+                            codigoCanjeado = :codigoCanjeado
+                        WHERE codigo = :codigo
                     "
                     ;  
                     $stmt = $this->instancia->prepare($query); 
-                    $stmt->bindParam(':ganador', $dniObject->dni); 
+                    $stmt->bindParam(':ganador', $usuarioObject->cedula);
+                    $stmt->bindParam(':codigoCanjeado', $usuarioObject->codigo);  
                     $stmt->bindParam(':codigo', $codigo_disponible['codigo']); 
                    
                     $stmt->execute();
@@ -311,7 +323,7 @@ class AjaxModel extends Conexion  {
 
              
             if ($this->instancia->commit() && $codigo_disponible) {
-                $response = array('status' => 'success','message' => 'Datos de Betplay registrados.', 'codigobetpay' => $codigo_disponible['codigo']);
+                $response = array('status' => 'success','message' => 'Datos de Betplay registrados.', 'codigobetpay' => $codigo_disponible['codigo'], 'usuario'=>$usuarioObject);
             }else{
                 $response = array('status' => 'ERROR','message' => 'No se pudo obtener un código de Betplay disponible. Si el problema persiste comunícate al centro de atención.');
             }

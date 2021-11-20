@@ -59,8 +59,8 @@ class AjaxController  {
         return $this->ajaxModel->updateRecargaData($recargaData);
     }
 
-    public function getBetPlayCode(object $dni){
-        return $this->ajaxModel->getBetPlayCode($dni);
+    public function getBetPlayCode(object $usuario){
+        return $this->ajaxModel->getBetPlayCode($usuario);
     }
 
     

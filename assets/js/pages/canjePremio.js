@@ -47,7 +47,7 @@ const app = new Vue({
                 console.log(response);
             
                 if (response.status == 'success') {
-                    this.usuario = new Usuario(); //Resetea el formulario al enviar
+                    //this.usuario = new Usuario(); //Resetea el formulario al enviar
                     this.instruccionesCanje = response.premio.instrucciones;
                     this.url_link = response.premio.url_link;
                     
@@ -101,7 +101,7 @@ const app = new Vue({
                             this.updateRecargaData(formValues);
                           }
                     }else if (response.premio.premio_id == 8) {
-                        const codigoBetplay = await this.getBetPlayCode(response.premio.dni);
+                        const codigoBetplay = await this.getBetPlayCode(this.usuario);
                         if (codigoBetplay.codigobetpay) {
                             var msg_betplay = codigoBetplay.codigobetpay;
                         }else{
@@ -205,9 +205,9 @@ const app = new Vue({
 
             
         },
-        async getBetPlayCode(dni){
+        async getBetPlayCode(usuario){
             let formData = new FormData();
-            formData.append('dni', JSON.stringify({'dni': dni}));  
+            formData.append('usuario', JSON.stringify(usuario));  
             const response = await fetch(`./api/index.php?action=getBetPlayCode`, {
                 method: 'POST',
                 body: formData
