@@ -47,7 +47,7 @@ const app = new Vue({
                 console.log(response);
             
                 if (response.status == 'success') {
-                    //this.usuario = new Usuario(); //Resetea el formulario al enviar
+                    
                     this.instruccionesCanje = response.premio.instrucciones;
                     this.url_link = response.premio.url_link;
                     
@@ -136,7 +136,7 @@ const app = new Vue({
                           })
                     }
 
-                    
+                    this.usuario = new Usuario(); //Resetea el formulario al enviar
 
                    
                 }else{
